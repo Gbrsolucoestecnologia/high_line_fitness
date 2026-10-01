@@ -1,0 +1,42 @@
+HIGH LINE FITNESS — LANDING PAGE
+=================================
+
+ESTRUTURA DA PASTA
+------------------
+index.html ................ página principal (abra no navegador)
+assets/css/styles.css ..... visual (cores, fontes, layout, animações)
+assets/js/config.js ....... >>> CONTEÚDO EDITÁVEL (window.HL) <<<
+assets/js/app.js .......... componentes e interações (não precisa editar)
+assets/img/ ............... logos (empilhado, horizontal e símbolo)
+midia/fotos/ .............. coloque aqui as fotos reais
+midia/videos/ ............. coloque aqui os vídeos reais
+midia/audio/ .............. coloque aqui as trilhas sonoras
+versao-arquivo-unico/ ..... a mesma página em um único HTML (para visualizar ou enviar)
+
+COMO COLOCAR O CONTEÚDO REAL
+----------------------------
+Edite somente o arquivo assets/js/config.js.
+Campo vazio ("") = o site mostra um placeholder no lugar.
+Campo preenchido = o conteúdo real aparece automaticamente.
+
+Exemplos:
+  contato.whatsapp:        "5585900000000"   (só números, com DDI + DDD)
+  links.inscricao:         "https://..."
+  midia.fitnessHero:       "midia/videos/fitness-hero.mp4"
+  midia.fitnessHeroPoster: "midia/fotos/fitness-hero-capa.jpg"
+  audio.principal.src:     "midia/audio/trilha-principal.mp3"
+  audio.classica.src:      "midia/audio/piano.mp3"
+  atividades > lanchonete > catalogo: "https://link-do-catalogo"
+
+DICAS DE MÍDIA
+--------------
+- Vídeos: MP4 (H.264), curtos, de preferência até 3 a 5 MB cada. Sempre informe um "Poster" (imagem de capa).
+- Fotos: JPG ou WebP, até ~300 KB cada.
+- Não coloque fotos/vídeos dentro do HTML: use os arquivos da pasta midia/.
+- Depoimentos de alunos: somente conteúdo REAL e autorizado.
+
+OBSERVAÇÕES
+-----------
+- Para testar com vídeos, áudios e mapa, abra o index.html por um servidor
+  (hospedagem do cliente ou extensão "Live Server" do VS Code).
+- O mapa usa o link "incorporar" do Google Maps (contato.mapsEmbed).
