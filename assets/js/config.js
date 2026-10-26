@@ -9,6 +9,19 @@
    ===================================================================== */
 window.HL = {
 
+  /* ---------- TEMA ----------
+     "natal"  = ativa o tema de Natal (neve, luzes, campanha, árvore, contagem regressiva)
+     "padrao" = volta ao visual normal da High Line                                  */
+  tema: "padrao",
+
+  /* ---------- Campanha de Natal (aparece só com tema "natal") ---------- */
+  natal: {
+    texto: "",                  // texto da campanha
+    beneficios: ["", "", ""],   // condições/benefícios REAIS da campanha
+    validade: "",               // ex.: "até 24/12"
+    link: ""                    // link de inscrição da campanha (vazio = usa links.inscricao)
+  },
+
   /* ---------- Contato e links ---------- */
   contato: {
     whatsapp: "",               // só números com DDI+DDD. Ex.: "5585900000000"
@@ -29,6 +42,7 @@ window.HL = {
   /* ---------- WhatsApp contextual (rótulo do botão + mensagem) ---------- */
   whatsappMensagens: {
     geral:      { rotulo: "Falar no WhatsApp",        msg: "Olá! Vim pelo site da High Line e gostaria de mais informações." },
+    natal:      { rotulo: "Falar sobre o Natal",      msg: "Olá! Vim pelo site e quero saber sobre a campanha de Natal da High Line." },
     musculacao: { rotulo: "Falar sobre musculação",   msg: "Olá! Quero saber mais sobre a musculação na High Line Fitness." },
     planos:     { rotulo: "Falar sobre planos",       msg: "Olá! Quero saber mais sobre os planos da High Line." },
     expansao:   { rotulo: "Falar sobre a Expansão",   msg: "Olá! Quero conhecer as atividades da Expansão High Line." },
@@ -38,13 +52,15 @@ window.HL = {
     cross:      { rotulo: "Falar sobre Cross",        msg: "Olá! Quero saber mais sobre o Cross Training na High Line." },
     danca:      { rotulo: "Falar sobre dança",        msg: "Olá! Quero saber mais sobre as aulas de dança na High Line." },
     bale:       { rotulo: "Falar sobre balé",         msg: "Olá! Quero saber mais sobre o balé na High Line." },
-    lanchonete: { rotulo: "Falar com a lanchonete",   msg: "Olá! Quero saber mais sobre a lanchonete da High Line." }
+    lanchonete: { rotulo: "Falar com a lanchonete",   msg: "Olá! Quero saber mais sobre a lanchonete da High Line." },
+    eventos:    { rotulo: "Falar sobre eventos",      msg: "Olá! Quero saber mais sobre os eventos High Adventure da High Line." }
   },
 
   /* ---------- Áudio ambiente ---------- */
   audio: {
     principal: { src: "", nome: "Trilha principal" },   // instrumental, sem voz
     classica:  { src: "", nome: "Piano / clássica" },   // toca nas seções de Dança e Balé
+    natal:     { src: "", nome: "Trilha de Natal" },    // com tema "natal", substitui a trilha principal
     volume: 0.5,
     fadeMs: 1800
   },
@@ -179,6 +195,20 @@ window.HL = {
       semProfessor: true,
       catalogo: "" /* link do catálogo da lanchonete (cardápio, PDF, Instagram, iFood etc.) */ }
   ],
+
+  /* ---------- Eventos: High Adventure ----------
+     >>> ÁREA PARA ATUALIZAR OS EVENTOS <<<
+     agendados: próximos eventos. Use a data no formato "AAAA-MM-DD" (ex.: "2026-11-15").
+                Quando a data passar, o evento vai sozinho para "Eventos passados".
+       { nome, data, horario, local, descricao, foto, link, vagas }
+     passados: eventos já realizados (somente reais).
+       { nome, data, local, resumo, capa, fotos: ["midia/fotos/..."], video }          */
+  eventos: {
+    nome: "High Adventure",
+    texto: "",
+    agendados: [],
+    passados: []
+  },
 
   /* ---------- 32. Horários ----------
      { dia:"seg"|"ter"|"qua"|"qui"|"sex"|"sab", horario, atividade, professor, modalidade, vagas } */

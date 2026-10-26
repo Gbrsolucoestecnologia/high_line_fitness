@@ -5,6 +5,8 @@
 (function () {
   "use strict";
   const HL = window.HL;
+  const NATAL = HL.tema === "natal";
+  if (NATAL) document.body.classList.add("theme-natal");
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const esc = s => String(s ?? "").replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
@@ -73,7 +75,7 @@
     `<a class="btn ${cls}" data-wa="${key}" ${num ? `data-wa-num="${esc(num)}"` : ""} target="_blank" rel="noopener"><svg class="wa-ico"><use href="#i-wa"/></svg>${esc(label)}</a>`;
 
   const CTASection = (key, link, dark) =>
-    `<div class="btns"><a class="btn ${dark ? "btn--ink" : "btn--red"}" data-link="inscricao" ${link ? `data-url="${esc(link)}"` : ""} target="_blank" rel="noopener">Fazer inscrição</a>${WhatsAppButton(key)}</div>`;
+    `<div class="btns"><a class="btn btn--red" data-link="inscricao" ${link ? `data-url="${esc(link)}"` : ""} target="_blank" rel="noopener">Fazer inscrição</a>${WhatsAppButton(key)}</div>`;
 
   /* Professor */
   function ProfessorCard(p) {
@@ -265,7 +267,7 @@
       <ul>${ben}</ul>
       <div style="display:flex;flex-wrap:wrap;gap:6px">${mods}</div>
       <p class="plan__obs">${val(p.observacoes, "Observações")}</p>
-      <a class="btn ${p.destaque ? "btn--ink" : "btn--red"}" data-link="inscricao" ${p.link ? `data-url="${esc(p.link)}"` : ""} target="_blank" rel="noopener">Fazer inscrição</a>
+      <a class="btn btn--red" data-link="inscricao" ${p.link ? `data-url="${esc(p.link)}"` : ""} target="_blank" rel="noopener">Fazer inscrição</a>
     </article>`;
   }
   function PlanComparison(el, cfg, nCols = 3) {
@@ -296,6 +298,70 @@
     };
     dEl.addEventListener("click", e => { const b = e.target.closest(".day"); if (b) { cur = b.dataset.d; render(); } });
     render();
+  }
+
+  /* Eventos — High Adventure (próximos + passados) */
+  const MESES = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
+  const parseISO = s => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ""); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; };
+  const fmtData = s => { const d = parseISO(s); return d ? `${String(d.getDate()).padStart(2, "0")} ${MESES[d.getMonth()]} ${d.getFullYear()}` : (s || ""); };
+  function EventCard(e, i) {
+    return `<article class="evc">
+      ${Slot({ src: e.foto, alt: e.nome, label: "[ Foto do evento ]", cls: "slot--h" })}
+      <span class="evc__date">${e.data ? esc(fmtData(e.data)) : "[ Data ]"}${e.horario ? " · " + esc(e.horario) : ""}</span>
+      <div class="evc__b">
+        <h3 class="evc__n">${val(e.nome, `Nome do evento ${i + 1}`)}</h3>
+        <p class="evc__l">${ico("pin")}<span>${val(e.local, "Local")}</span></p>
+        <p class="evc__d">${val(e.descricao, "Descrição do evento")}</p>
+        ${e.vagas ? `<span class="pill">${esc(e.vagas)}</span>` : ""}
+        <a class="btn btn--red btn--sm" data-link="inscricao" ${e.link ? `data-url="${esc(e.link)}"` : ""} target="_blank" rel="noopener">Quero participar</a>
+      </div>
+    </article>`;
+  }
+  function PastEventCard(e, i) {
+    const fotos = (e.fotos || []).filter(Boolean);
+    const fk = reg(fotos.length ? fotos.map((f, k) => ({ titulo: `${e.nome || "Evento"} — foto ${k + 1}`, src: f, img: true }))
+                                : [{ titulo: e.nome || "Fotos do evento", img: true }, { titulo: e.nome || "Fotos do evento", img: true }]);
+    const vk = e.video ? reg([{ titulo: e.nome || "Vídeo do evento", src: e.video, poster: e.capa, formato: "horizontal" }]) : "";
+    return `<article class="evc evc--past">
+      ${Slot({ src: e.capa || fotos[0], alt: e.nome, label: "[ Foto de capa do evento ]", cls: "slot--h" })}
+      <span class="evc__date evc__date--past">Realizado · ${e.data ? esc(fmtData(e.data)) : "[ Data ]"}</span>
+      <div class="evc__b">
+        <h3 class="evc__n">${val(e.nome, `Evento realizado ${i + 1}`)}</h3>
+        <p class="evc__l">${ico("pin")}<span>${val(e.local, "Local")}</span></p>
+        <p class="evc__d">${val(e.resumo, "Resumo de como foi o evento")}</p>
+        <div class="btns">
+          <button class="btn btn--ghost btn--sm" data-vlist="${fk}" data-vi="0">${ico("img")} Ver fotos${fotos.length ? ` (${fotos.length})` : ""}</button>
+          ${vk ? `<button class="btn btn--ghost btn--sm" data-vlist="${vk}" data-vi="0">▶ Ver vídeo</button>` : ""}
+        </div>
+      </div>
+    </article>`;
+  }
+  function EventsSection() {
+    const E = HL.eventos || {};
+    $("#evNome").textContent = E.nome || "High Adventure";
+    $("#evTexto").innerHTML = E.texto ? esc(E.texto) : ph("Texto sobre os eventos High Adventure");
+    const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+    const ag = [...(E.agendados || []), ...(E.lista || [])];
+    const futuros = ag.filter(e => { const d = parseISO(e.data); return !d || d >= hoje; })
+      .sort((x, y) => (parseISO(x.data) || 0) - (parseISO(y.data) || 0));
+    const vencidos = ag.filter(e => { const d = parseISO(e.data); return d && d < hoje; })
+      .map(e => ({ ...e, resumo: e.resumo || e.descricao, capa: e.capa || e.foto }));
+    const passados = [...(E.passados || []), ...vencidos].sort((x, y) => (parseISO(y.data) || 0) - (parseISO(x.data) || 0));
+    const vazio = !futuros.length && !passados.length;   /* sem nada cadastrado: mostra a estrutura */
+    const msg = t => `<div class="empty ev-empty">${t}</div>`;
+    $("#evProx").innerHTML = futuros.length ? futuros.map(EventCard).join("")
+      : vazio ? [{}, {}, {}].map(EventCard).join("")
+      : msg(`Novos eventos High Adventure em breve. <a class="ev-empty__a" data-wa="eventos" target="_blank" rel="noopener">Quero ser avisado no WhatsApp →</a>`);
+    $("#evPass").innerHTML = passados.length ? passados.map(PastEventCard).join("")
+      : vazio ? [{}, {}, {}].map(PastEventCard).join("")
+      : msg("Os eventos realizados vão aparecer aqui.");
+    $("#evNProx").textContent = futuros.length || ""; $("#evNPass").textContent = passados.length || "";
+    const tabs = $("#evTabs");
+    tabs.addEventListener("click", ev => {
+      const t = ev.target.closest(".evtab"); if (!t) return;
+      $$(".evtab", tabs).forEach(x => { const on = x === t; x.classList.toggle("on", on); x.setAttribute("aria-selected", on); });
+      $("#evProx").hidden = t.dataset.t !== "prox"; $("#evPass").hidden = t.dataset.t !== "pass";
+    });
   }
 
   /* Localização */
@@ -389,6 +455,7 @@
     $("#mosaic").innerHTML = ve.map((v, i) => VideoCard({ ...v, formato: "vertical" }, vek, i)).join("");
 
     Schedule();
+    EventsSection();
     LocationSection();
 
     /* Redes */
@@ -518,8 +585,9 @@
     init() {
       ["principal", "classica"].forEach(k => {
         const el = new Audio(); el.loop = true; el.preload = "none"; el.volume = 0;
-        if (HL.audio[k].src) el.src = HL.audio[k].src;
-        this.t[k] = { el, src: HL.audio[k].src, nome: HL.audio[k].nome };
+        const tr = k === "principal" && NATAL && HL.audio.natal && HL.audio.natal.src ? HL.audio.natal : HL.audio[k];
+        if (tr.src) el.src = tr.src;
+        this.t[k] = { el, src: tr.src, nome: k === "principal" && NATAL ? (HL.audio.natal || tr).nome : tr.nome };
       });
       $("#audToggle").onclick = () => this.on ? this.pause() : this.play();
       this.ui();
@@ -545,7 +613,8 @@
       const tr = this.t[this.want];
       $("#aud").classList.toggle("playing", this.on);
       $("#audToggle").innerHTML = ico(this.on ? "vol" : "mute");
-      $("#audToggle").setAttribute("aria-label", this.on ? "Desligar som" : "Ligar som");
+      $("#audToggle").setAttribute("aria-label", this.on ? "Desligar música" : "Ligar música");
+      $("#audToggle").title = this.on ? "Desligar música" : "Ligar música";
       $("#audName").textContent = tr.src ? tr.nome : `${tr.nome} (não cadastrada)`;
     }
   };
@@ -570,7 +639,7 @@
     const hdr = $("#hdr"), open = $("#inicio"), fit = $("#fitness"), exp = $("#expansao"), trans = $("#trans"), stage = $(".trans__stage", trans);
     const navEls = $$("#nav [data-key]");
     const targets = [["inicio","inicio"],["personalizar","experiencia"],["universos","inicio"],["fitness","fitness"],["professores","professores"],["depoimentos","depoimentos"],["galeria","fitness"],["planos","planos"],
-      ["trans","expansao"],["expansao","expansao"],["professores-expansao","professores"],["depoimentos-expansao","depoimentos"],["vivido","expansao"],["planos-expansao","planos"],["contato","contato"]]
+      ["trans","expansao"],["expansao","expansao"],["professores-expansao","professores"],["depoimentos-expansao","depoimentos"],["vivido","expansao"],["planos-expansao","planos"],["eventos","eventos"],["contato","contato"]]
       .map(([id, key]) => [document.getElementById(id), key]).filter(t => t[0]);
     const prog = $("#hdrProg");
     const heroes = $$(".hero .slot--cover, .open__split, .open > .slot--cover");
@@ -746,6 +815,92 @@
     addEventListener("wheel", () => { if (openId && !$(".mega.is-open:hover")) set(null); }, { passive: true });
   }
 
+
+  /* =================================================================
+     TEMA DE NATAL
+     ================================================================= */
+  function initNatal() {
+    if (!NATAL) { const s = $("#snow"); if (s) s.remove(); return; }
+    const N = HL.natal || {};
+    $("#natalTexto").innerHTML = N.texto ? esc(N.texto) : ph("Texto da campanha de Natal");
+    $("#natalBen").innerHTML = (N.beneficios && N.beneficios.length ? N.beneficios : ["", "", ""])
+      .map(x => `<li>${x ? esc(x) : ph("Benefício / condição da campanha")}</li>`).join("");
+    $("#natalValidade").innerHTML = `Válido até ${N.validade ? esc(N.validade) : ph("validade")}`;
+    if (N.link) $("#natalBtn").dataset.url = N.link;
+    bindLinks($("#natal"));
+
+    /* Contagem regressiva para 25/12 */
+    const cd = $("#countdown"), lbl = $("#cdLabel");
+    const two = n => String(n).padStart(2, "0");
+    const tick = () => {
+      const now = new Date(), y = now.getFullYear(), xmas = new Date(y, 11, 25), end = new Date(y + 1, 0, 1);
+      if (now >= xmas && now < end) { lbl.textContent = "Boas festas"; cd.innerHTML = `<p class="d d-m" style="margin:0">Feliz <span class="it gold">Natal!</span></p>`; return; }
+      let s = Math.max(0, Math.floor((xmas - now) / 1000));
+      const d = Math.floor(s / 86400); s %= 86400;
+      const h = Math.floor(s / 3600); s %= 3600;
+      const m = Math.floor(s / 60); s %= 60;
+      cd.innerHTML = [[d, "dias"], [two(h), "horas"], [two(m), "min"], [two(s), "seg"]].map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join("");
+    };
+    tick(); setInterval(tick, 1000);
+
+    /* Árvore de hexágonos (cores da marca + verde de Natal) */
+    const r = 30, w = Math.sqrt(3) * r, rows = 5, cx = 200, top = 92;
+    const hex = (x, y, rr) => Array.from({ length: 6 }, (_, k) => { const a = Math.PI / 180 * (60 * k - 90); return `${(x + rr * Math.cos(a)).toFixed(1)},${(y + rr * Math.sin(a)).toFixed(1)}`; }).join(" ");
+    const fills = ["pine", "red", "pine", "line", "pine", "pine", "red", "line", "pine", "red", "pine", "pine", "line", "red", "pine"];
+    let k = 0, cells = "", orns = "";
+    for (let i = 0; i < rows; i++) for (let j = 0; j <= i; j++) {
+      const x = cx + (j - i / 2) * w, y = top + i * 1.5 * r, f = fills[k % fills.length];
+      cells += `<polygon class="t-${f}" points="${hex(x, y, r - 2.5)}" style="--d:${(k * 0.07).toFixed(2)}s"/>`;
+      if (k % 3 === 1) orns += `<circle class="t-orn" cx="${(x + (j % 2 ? 8 : -8)).toFixed(1)}" cy="${(y + 12).toFixed(1)}" r="4.5" style="--d:${(k * 0.37 % 2.4).toFixed(2)}s"/>`;
+      k++;
+    }
+    const baseY = top + (rows - 1) * 1.5 * r + r;
+    const star = (x, y, R, rr) => Array.from({ length: 10 }, (_, i) => { const a = Math.PI / 5 * i - Math.PI / 2, q = i % 2 ? rr : R; return `${(x + q * Math.cos(a)).toFixed(1)},${(y + q * Math.sin(a)).toFixed(1)}`; }).join(" ");
+    $("#natalTree").innerHTML = `<svg viewBox="0 0 400 460" role="img">
+      <defs><radialGradient id="tglow"><stop offset="0" stop-color="#E3BE6B" stop-opacity=".35"/><stop offset="1" stop-color="#E3BE6B" stop-opacity="0"/></radialGradient></defs>
+      <circle cx="200" cy="40" r="90" fill="url(#tglow)"/>
+      <ellipse cx="200" cy="${baseY + 52}" rx="150" ry="14" fill="rgba(242,240,238,.08)"/>
+      <rect x="186" y="${baseY - 4}" width="28" height="44" fill="#9E1F26"/>
+      <rect x="186" y="${baseY - 4}" width="28" height="6" fill="rgba(0,0,0,.35)"/>
+      ${cells}${orns}
+      <polygon class="t-star" points="${star(200, 46, 26, 11)}"/>
+    </svg>`;
+
+    /* Luzes de Natal */
+    const lights = () => $$(".xl").forEach(el => {
+      const W = el.parentElement.getBoundingClientRect().width, n = Math.max(6, Math.floor(W / 46));
+      el.style.width = n * 46 + "px";
+      if (el.children.length !== n) el.innerHTML = "<i></i>".repeat(n);
+    });
+    lights(); addEventListener("resize", lights);
+
+    /* Neve */
+    const c = $("#snow");
+    if (reduce || !c) { if (c) c.remove(); return; }
+    const x = c.getContext("2d"), dpr = Math.min(2, devicePixelRatio || 1);
+    let W, H, fl = [], last = performance.now(), run = true;
+    const mk = init => ({ x: Math.random() * W, y: init ? Math.random() * H : -10, r: .6 + Math.random() * 2.2, s: .35 + Math.random() * .9, d: Math.random() * 6.28, a: .3 + Math.random() * .5 });
+    const resize = () => {
+      W = innerWidth; H = innerHeight; c.width = W * dpr; c.height = H * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.round(Math.min(130, W / 11));
+      while (fl.length < n) fl.push(mk(true)); fl.length = n;
+    };
+    const frame = n => {
+      if (!run) return;
+      const dt = Math.min(50, n - last) / 16.67; last = n;
+      x.clearRect(0, 0, W, H); x.fillStyle = "#fff";
+      for (const f of fl) {
+        f.y += f.s * dt; f.d += .012 * dt; f.x += Math.sin(f.d) * .45 * dt;
+        if (f.y > H + 6) Object.assign(f, mk(false));
+        x.globalAlpha = f.a; x.beginPath(); x.arc(f.x, f.y, f.r, 0, 6.283); x.fill();
+      }
+      requestAnimationFrame(frame);
+    };
+    resize(); addEventListener("resize", resize);
+    document.addEventListener("visibilitychange", () => { run = !document.hidden; if (run) { last = performance.now(); requestAnimationFrame(frame); } });
+    requestAnimationFrame(frame);
+  }
+
   /* ---------------- Menu mobile ---------------- */
   function initMenu() {
     const b = $("#burger"), body = document.body;
@@ -770,5 +925,6 @@
   initExpansaoLink();
   initFitnessLink();
   initMega();
+  initNatal();
   bindLinks($("#hdr"));
 })();

@@ -28,6 +28,20 @@ Exemplos:
   audio.classica.src:      "midia/audio/piano.mp3"
   atividades > lanchonete > catalogo: "https://link-do-catalogo"
 
+TEMA DE NATAL
+-------------
+No início do config.js:  tema: "natal"   (ativado)
+Para voltar ao visual normal depois das festas:  tema: "padrao"
+A campanha (texto, benefícios, validade e link) fica em  natal: { ... }
+Trilha natalina opcional:  audio.natal.src
+
+EVENTOS (HIGH ADVENTURE)
+------------------------
+No config.js, em  eventos: { ... }
+  agendados: próximos eventos -> data no formato "AAAA-MM-DD"
+             quando a data passa, o evento vai sozinho para "Eventos passados"
+  passados:  eventos já realizados, com capa, fotos e vídeo
+
 DICAS DE MÍDIA
 --------------
 - Vídeos: MP4 (H.264), curtos, de preferência até 3 a 5 MB cada. Sempre informe um "Poster" (imagem de capa).

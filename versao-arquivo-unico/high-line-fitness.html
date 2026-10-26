@@ -766,9 +766,285 @@ a.chip{display:inline-flex;align-items:center}
 .prod__b{padding:20px 20px 22px}
 .act__grid--solo{grid-template-columns:1fr}
 
+/* =========================================================
+   TEMA DE NATAL  (ativado por HL.tema = "natal")
+   ========================================================= */
+:root{--gold:#E3BE6B;--pine:#1E5A40}
+body:not(.theme-natal) [data-natal]{display:none!important}
+.gold{color:var(--gold)}
+.snow{position:fixed;inset:0;width:100%;height:100%;z-index:45;pointer-events:none}
+.theme-natal .tag::before{background:var(--gold)}
+.theme-natal .sec--light{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='none' stroke='%23060508' stroke-opacity='.07' stroke-width='1.4' stroke-linecap='round'%3E%3Cg transform='translate(34 36)'%3E%3Cpath d='M0-12V12M-10.4-6 10.4 6M-10.4 6 10.4-6M-3-9 0-12 3-9M-3 9 0 12 3 9'/%3E%3C/g%3E%3Cg transform='translate(104 100) scale(.7)'%3E%3Cpath d='M0-12V12M-10.4-6 10.4 6M-10.4 6 10.4-6M-3-9 0-12 3-9M-3 9 0 12 3 9'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");background-size:140px 140px}
+.theme-natal .btn--red:hover{background:repeating-linear-gradient(-45deg,#e23a41 0 10px,#c22a32 10px 20px)}
+.theme-natal .hero::after,.theme-natal .open::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;z-index:3;pointer-events:none;
+  background:radial-gradient(60% 100% at 80% 100%,rgba(227,190,107,.12),transparent 70%)}
+/* portão */
+.gate__natal{margin:-8px 0 0;font:800 12px/1 var(--display);font-stretch:118%;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+/* chip na abertura */
+.natal-chip{display:inline-flex;align-items:center;gap:10px;margin:0 0 22px;padding:10px 16px;font:800 11.5px/1 var(--display);font-stretch:112%;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--gold);background:rgba(227,190,107,.08);box-shadow:inset 0 0 0 1px rgba(227,190,107,.5);transition:background .25s;
+  clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.natal-chip:hover{background:rgba(227,190,107,.18)}
+.natal-chip span{font-size:15px}
+.open .natal-chip{opacity:0;transform:translateY(14px);transition:opacity .8s ease .3s,transform .8s cubic-bezier(.2,.7,.2,1) .3s,background .25s}
+.open.play .natal-chip{opacity:1;transform:none}
+.open__content{display:flex;flex-direction:column;align-items:flex-start}
+/* luzes */
+.xl{position:absolute;left:50%;transform:translateX(-50%);bottom:-15px;height:20px;display:flex;pointer-events:none;z-index:1;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='12' viewBox='0 0 46 12'%3E%3Cpath d='M0 1.5Q23 13 46 1.5' fill='none' stroke='%23332f38' stroke-width='1.6'/%3E%3C/svg%3E") repeat-x 0 0/46px 12px}
+.xl i{position:relative;flex:0 0 46px;display:flex;justify-content:center}
+.xl i::before{content:"";position:absolute;top:8px;width:5px;height:4px;background:#2a272e;border-radius:1px}
+.xl i::after{content:"";position:absolute;top:11px;width:8px;height:11px;border-radius:50% 50% 50% 50%/42% 42% 58% 58%;background:var(--b);box-shadow:0 0 10px 2px var(--b);animation:tw 2.6s ease-in-out infinite;animation-delay:var(--dl,0s)}
+.xl i:nth-child(4n+1){--b:#ff4d55}
+.xl i:nth-child(4n+2){--b:#F2CC74;--dl:.6s}
+.xl i:nth-child(4n+3){--b:#ffffff;--dl:1.2s}
+.xl i:nth-child(4n+4){--b:#4fd18f;--dl:1.8s}
+.xl i:nth-child(3n){--dl:.9s}
+@keyframes tw{0%,100%{opacity:1}50%{opacity:.35;box-shadow:0 0 2px 0 var(--b)}}
+.xl--top{top:-4px;bottom:auto}
+/* campanha */
+.natal{position:relative;overflow:hidden;color:var(--chalk);
+  background:radial-gradient(900px 520px at 82% 30%,rgba(227,190,107,.13),transparent 60%),radial-gradient(700px 520px at 8% 95%,rgba(217,54,60,.2),transparent 60%),#0b0a0e}
+.natal__g{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(30px,5vw,80px);align-items:center}
+.natal__txt{display:grid;gap:24px;justify-items:start}
+.tag--gold{color:var(--gold)}
+.natal__cdl{margin:0 0 10px;color:var(--gold)}
+.cd{display:flex;flex-wrap:wrap;gap:8px}
+.cd div{min-width:78px;padding:14px 10px 12px;text-align:center;background:rgba(242,240,238,.05);box-shadow:inset 0 0 0 1px rgba(227,190,107,.35);
+  clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.cd b{display:block;font:900 clamp(26px,3vw,40px)/1 var(--display);font-stretch:120%;font-variant-numeric:tabular-nums}
+.cd span{display:block;margin-top:6px;font:800 10.5px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--steel)}
+.natal__list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.natal__list li{display:flex;gap:12px;font-size:16px}
+.natal__list li::before{content:"";flex:none;width:11px;height:12px;margin-top:6px;background:var(--gold);clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)}
+.natal__tree svg{display:block;width:100%;max-width:440px;margin:0 auto;overflow:visible}
+.t-pine{fill:var(--pine)}
+.t-red{fill:var(--red)}
+.t-line{fill:rgba(242,240,238,.06);stroke:var(--chalk);stroke-width:2.2}
+.natal__tree polygon:not(.t-star){transform-box:fill-box;transform-origin:center;animation:hexIn .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d)}
+@keyframes hexIn{from{opacity:0;transform:scale(.4)}}
+.t-orn{fill:var(--gold);filter:drop-shadow(0 0 5px rgba(242,204,116,.9));animation:tw 2.4s ease-in-out infinite;animation-delay:var(--d)}
+.t-star{fill:var(--gold);filter:drop-shadow(0 0 14px rgba(242,204,116,.85));transform-box:fill-box;transform-origin:center;animation:starPulse 3s ease-in-out infinite}
+@keyframes starPulse{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.08) rotate(6deg)}}
+/* mensagens */
+.natal-greet{margin:0;font:400 italic clamp(15px,1.3vw,18px)/1.5 var(--display);color:var(--gold)}
+.foot__natal{color:var(--gold);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:12px}
+.mnav .mnav__natal{display:flex;align-items:center;gap:10px;margin:-6px 0 14px;padding:14px 18px!important;font-size:clamp(15px,4.2vw,20px)!important;color:var(--gold);border:1.5px solid rgba(227,190,107,.6)!important}
+@media (max-width:980px){.natal__g{grid-template-columns:minmax(0,1fr)}.natal__tree{order:-1;width:min(260px,70%);margin:0 auto}}
+@media (hover:none){.theme-natal .btn--red:hover{background:var(--red)}}
+@media (prefers-reduced-motion:reduce){.snow{display:none}.xl i::after,.t-orn,.t-star{animation:none!important}}
+
+/* ---------- Botão de música: ícone pequeno no canto ---------- */
+.aud{width:34px;height:34px;padding:0;gap:0;justify-content:center;border-radius:50%;
+  left:max(14px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));
+  background:rgba(17,16,20,.72);border:1px solid rgba(242,240,238,.14);opacity:.75;transition:opacity .25s,border-color .25s,transform .25s}
+.aud:hover,.aud:focus-within{opacity:1;border-color:var(--red);transform:scale(1.06)}
+.aud__eq,.aud__name{display:none!important}
+.aud button{width:34px;height:34px;border-radius:50%}
+.aud svg{width:15px;height:15px}
+.aud.playing button{color:var(--chalk)}
+.aud:not(.playing) button{color:var(--steel)}
+
+/* =========================================================
+   AJUSTES VISUAIS: títulos sem corte, botões arredondados,
+   botões 3D no topo, atalhos maiores e fundo preto em degradê
+   ========================================================= */
+/* títulos sem o corte horizontal */
+.slit,.ln .slit{background-image:none!important;-webkit-background-clip:border-box;background-clip:border-box;color:var(--c)}
+
+/* botões arredondados e em caixa alta */
+.btn{clip-path:none;border-radius:14px;text-transform:uppercase}
+.btn--sm{border-radius:12px}
+.chip,.nav .nav__xp,.natal-chip{clip-path:none;border-radius:999px}
+.chip{padding:0 18px}
+.day{border-radius:12px;text-transform:uppercase}
+.popt{border-radius:12px}
+.pers__item{border-radius:10px}
+.rail-ctl button,.vm__nav button,.m-x{clip-path:none;border-radius:50%}
+.m-x{border-radius:0 0 0 14px}
+.wa-float{clip-path:none;border-radius:16px}
+.gate__skip{text-transform:uppercase;letter-spacing:.08em;font-size:12px}
+.cd div{clip-path:none;border-radius:12px}
+
+/* botão de compra no bloco vermelho: vermelho com contorno branco */
+.btn--ring{box-shadow:0 0 0 2px #fff,0 12px 26px rgba(0,0,0,.28)}
+.btn--ring:hover{box-shadow:0 0 0 2px #fff,0 16px 30px rgba(0,0,0,.34);transform:translateY(-1px)}
+
+/* botões 3D (cabeçalho e abertura) */
+.btn3d{transition:transform .15s ease,box-shadow .15s ease,background .25s}
+.btn3d.btn--red{background:linear-gradient(180deg,#ef4c53 0%,#d9363c 55%,#c0272e 100%);box-shadow:0 5px 0 #7c141a,0 12px 22px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.3)}
+.btn3d.btn--red:hover{background:linear-gradient(180deg,#f65a61 0%,#e2414a 55%,#c92f36 100%)}
+.btn3d.btn--ghost{background:linear-gradient(180deg,#2e2b34,#151319);box-shadow:0 5px 0 #000,0 12px 22px rgba(0,0,0,.45),inset 0 0 0 1.5px rgba(242,240,238,.38),inset 0 2px 0 rgba(255,255,255,.08)}
+.btn3d.btn--ghost:hover{background:linear-gradient(180deg,#38353f,#1b191f)}
+.btn3d.btn--light{background:linear-gradient(180deg,#ffffff,#dcd8d3);box-shadow:0 5px 0 #8f8a85,0 12px 22px rgba(0,0,0,.4),inset 0 1px 0 #fff}
+.btn3d.btn--light:hover{background:linear-gradient(180deg,#fff,#e8e5e1)}
+.btn3d:hover{transform:translateY(-2px)}
+.btn3d:active{transform:translateY(4px)}
+.btn3d.btn--red:active{box-shadow:0 1px 0 #7c141a,0 4px 10px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.2)}
+.btn3d.btn--ghost:active{box-shadow:0 1px 0 #000,0 4px 10px rgba(0,0,0,.4),inset 0 0 0 1.5px rgba(242,240,238,.38)}
+.btn3d.btn--light:active{box-shadow:0 1px 0 #8f8a85,0 4px 10px rgba(0,0,0,.35)}
+.btn--sm.btn3d.btn--red{box-shadow:0 4px 0 #7c141a,0 8px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.3)}
+.nav .nav__xp.btn3d{background:linear-gradient(180deg,#2a1417,#150b0d);color:#fff;border-radius:12px;padding:11px 16px;
+  box-shadow:0 4px 0 #7c141a,0 8px 16px rgba(0,0,0,.45),inset 0 0 0 1.5px var(--red),inset 0 1px 0 rgba(255,255,255,.1)}
+.nav .nav__xp.btn3d:hover,.nav .nav__xp.btn3d.on{background:linear-gradient(180deg,#ef4c53,#c0272e);transform:translateY(-2px)}
+.nav .nav__xp.btn3d:active{transform:translateY(3px);box-shadow:0 1px 0 #7c141a,inset 0 0 0 1.5px var(--red)}
+.open .btns{padding-bottom:6px}
+
+/* atalhos do topo maiores */
+.nav a,.nav__btn{font-size:14px;letter-spacing:.05em;font-stretch:104%;padding:10px 10px}
+.nav .nav__xp{font-size:13px;letter-spacing:.05em}
+.nav__car{width:13px;height:13px}
+.uni{font-size:12.5px}
+.mlink__t{font-size:15.5px}
+.mlink__d{font-size:14px}
+.mact__n{font-size:13.5px}
+.mega__side a{font-size:14.5px}
+.mega__lead{font-size:12.5px}
+.mnav a:not(.btn):not(.chip){font-size:clamp(26px,7vw,40px)}
+
+/* fundo preto em degradê */
+body{background:#060508}
+.sec:not(.sec--light):not(.cta-red):not(.natal),.act:not(.act--bale):not(.act--agua):not(.act--cross),.foot,.trans{
+  background:linear-gradient(180deg,#08070a 0%,#17141c 50%,#08070a 100%)}
+.act--agua{background:radial-gradient(1200px 500px at 85% 0%,rgba(242,240,238,.05),transparent 60%),linear-gradient(180deg,#08070a 0%,#17141c 50%,#08070a 100%)}
+.act--cross{background:linear-gradient(115deg,transparent 0 62%,rgba(217,54,60,.1) 62% 100%),linear-gradient(180deg,#08070a 0%,#17141c 50%,#08070a 100%)}
+.gate,.gate__half{background:linear-gradient(180deg,#0a090d,#060508)}
+.gate__half--t{background:linear-gradient(180deg,#141118,#0a090d)}
+.gate__half--b{background:linear-gradient(180deg,#0a090d,#141118)}
+.mnav{background:linear-gradient(180deg,#141118 0%,#060508 70%)}
+.mega{background:linear-gradient(180deg,rgba(22,19,27,.98),rgba(6,5,8,.98))}
+.hdr.scrolled{background:linear-gradient(180deg,rgba(22,19,27,.92),rgba(6,5,8,.9))}
+
+/* ---------- Cabeçalho: larguras com os atalhos maiores ---------- */
+@media (min-width:1140px) and (max-width:1439px){
+  .hdr__in{padding:0 32px}
+  .hdr__logo img{height:34px}
+  .hdr__wa{width:44px;min-height:44px;padding:0}
+  .hdr__wa-t{display:none}
+}
+@media (min-width:1140px) and (max-width:1239px){
+  .nav a,.nav__btn{font-size:13px;padding:10px 8px}
+  .nav .nav__xp{font-size:12px;padding:10px 12px}
+}
+@media (max-width:1139px){
+  .nav,.mega{display:none}
+  .burger{display:grid;margin-left:4px}
+  .hdr__act{margin-left:auto}
+  .hdr__wa{width:auto;padding:0 18px}
+  .hdr__wa-t{display:inline}
+}
+
+/* ---------- Mega menu: cards 3D com cantos arredondados ---------- */
+.mega__grid{gap:12px}
+.mlink{border-left:0;border-radius:14px;padding:18px 20px;background:linear-gradient(180deg,#29262f 0%,#1a181f 100%);
+  box-shadow:0 5px 0 #050407,0 12px 22px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08),inset 0 0 0 1px rgba(255,255,255,.04);
+  transition:transform .18s ease,box-shadow .18s ease,background .25s}
+.mlink:hover{transform:translateY(-3px);background:linear-gradient(180deg,#322e39 0%,#1f1c25 100%);
+  box-shadow:0 8px 0 #050407,0 18px 28px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.1),inset 0 0 0 1.5px var(--red)}
+.mlink:active{transform:translateY(4px);box-shadow:0 1px 0 #050407,0 4px 10px rgba(0,0,0,.4),inset 0 0 0 1.5px var(--red)}
+.mlink--wa{background:linear-gradient(180deg,#1d4a31 0%,#12301f 100%);box-shadow:0 5px 0 #08170f,0 12px 22px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1)}
+.mlink--wa:hover{background:linear-gradient(180deg,#24c062 0%,#1a9a4c 100%);box-shadow:0 8px 0 #0d4d27,0 18px 28px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.25)}
+.mlink--wa:hover .mlink__d{color:rgba(255,255,255,.85)}
+.mlink--wa:active{box-shadow:0 1px 0 #0d4d27,0 4px 10px rgba(0,0,0,.4)}
+.mega__acts{gap:12px}
+.mact{border-radius:14px;background:linear-gradient(180deg,#29262f 0%,#1a181f 100%);
+  box-shadow:0 5px 0 #050407,0 12px 22px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08);transition:transform .18s ease,box-shadow .18s ease,background .25s}
+.mact:hover{transform:translateY(-3px);background:linear-gradient(180deg,#ef4c53 0%,#c0272e 100%);box-shadow:0 8px 0 #7c141a,0 18px 28px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.3)}
+.mact:active{transform:translateY(4px);box-shadow:0 1px 0 #7c141a,0 4px 10px rgba(0,0,0,.4)}
+.mega__in{padding-bottom:46px}
+
+/* ---------- Fundo: degradê em tons de preto ---------- */
+:root{
+  --bg-black:
+    radial-gradient(70% 55% at 12% 24%, rgba(42,39,49,.95) 0%, rgba(42,39,49,0) 70%),
+    radial-gradient(60% 50% at 88% 76%, rgba(30,28,36,.95) 0%, rgba(30,28,36,0) 70%),
+    linear-gradient(180deg,#030204 0%,#0e0d12 50%,#030204 100%);
+}
+.sec:not(.sec--light):not(.cta-red):not(.natal),.act:not(.act--bale):not(.act--agua):not(.act--cross),.foot,.trans{background:var(--bg-black)}
+.act--agua{background:radial-gradient(1200px 500px at 85% 0%,rgba(242,240,238,.05),transparent 60%),var(--bg-black)}
+.act--cross{background:linear-gradient(115deg,transparent 0 62%,rgba(217,54,60,.1) 62% 100%),var(--bg-black)}
+.gate,.gate__half--t,.gate__half--b{background:var(--bg-black)}
+.mnav{background:var(--bg-black)}
+/* espaços de mídia vazios (inclusive os do topo) também em degradê de preto */
+.slot.is-empty{background:repeating-linear-gradient(135deg,rgba(255,255,255,.022) 0 2px,transparent 2px 16px),
+  radial-gradient(80% 70% at 25% 20%,#2a2730 0%,rgba(42,39,48,0) 70%),linear-gradient(160deg,#18161c 0%,#060508 100%)}
+.sec--light .slot.is-empty{background:repeating-linear-gradient(135deg,rgba(6,5,8,.04) 0 2px,transparent 2px 16px),var(--carbon)}
+.act--bale .slot.is-empty{background:repeating-linear-gradient(135deg,rgba(6,5,8,.04) 0 2px,transparent 2px 16px),#e6e3df}
+.gate__half--t,.gate__half--b{background:var(--bg-black);background-size:100% 200%;background-repeat:no-repeat}
+.gate__half--t{background-position:center top}
+.gate__half--b{background-position:center bottom}
+
+/* ---------- Eventos: High Adventure ---------- */
+.ev-ico{width:34px;height:34px;flex:none;color:var(--red)}
+.mlink--ev{grid-column:1/-1;display:flex;align-items:center;gap:18px;background:linear-gradient(120deg,#3a1418 0%,#1d1013 55%,#141218 100%);
+  box-shadow:0 5px 0 #2a080b,0 12px 22px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08),inset 0 0 0 1.5px rgba(217,54,60,.55)}
+.mlink--ev>span:not(.mlink__go){display:grid;gap:6px;flex:1}
+.mlink__go{flex:none;font:800 12.5px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:#fff;padding:12px 16px;border-radius:999px;background:var(--red)}
+.mlink--ev:hover{background:linear-gradient(120deg,#4a181d 0%,#25131a 55%,#18151d 100%);box-shadow:0 8px 0 #2a080b,0 18px 28px rgba(0,0,0,.45),inset 0 0 0 1.5px var(--red)}
+.mlink--ev:hover .ev-ico{color:#fff}
+.evs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.evc{position:relative;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:linear-gradient(180deg,#221f27,#141217);
+  box-shadow:0 6px 0 #050407,0 16px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.07);transition:transform .2s ease,box-shadow .2s ease}
+.evc:hover{transform:translateY(-4px);box-shadow:0 10px 0 #050407,0 22px 36px rgba(0,0,0,.45),inset 0 0 0 1.5px var(--red)}
+.evc__date{position:absolute;top:14px;left:14px;z-index:3;padding:8px 12px;border-radius:999px;background:var(--red);color:#fff;font:800 11.5px/1 var(--display);letter-spacing:.08em;text-transform:uppercase}
+.evc__b{display:grid;gap:12px;padding:20px 20px 22px;flex:1;align-content:start}
+.evc__n{margin:0;font:900 19px/1.15 var(--display);font-stretch:118%;text-transform:uppercase}
+.evc__l{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;color:var(--steel)}
+.evc__l svg{width:16px;height:16px;flex:none;color:var(--red)}
+.evc__d{margin:0;font-size:15px;color:rgba(242,240,238,.8)}
+.evc .btn{justify-self:start;margin-top:4px}
+@media (max-width:980px){.evs{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}}
+@media (max-width:680px){.evs{display:grid;grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:82vw;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(var(--pad)*-1);padding:0 var(--pad) 14px}.evc{scroll-snap-align:start}.mlink__go{display:none}}
+.uni a{white-space:nowrap}
+@media (max-width:680px){.uni{font-size:10px;letter-spacing:.05em}.uni__bar{margin:0 8px}}
+
+/* ---------- Eventos: abas próximos / passados ---------- */
+.ev-tabs{display:inline-flex;gap:6px;padding:6px;margin-bottom:26px;border-radius:999px;background:linear-gradient(180deg,#0c0b0f,#1a181e);
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.05)}
+.evtab{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;font:800 13px/1 var(--display);font-stretch:112%;letter-spacing:.07em;text-transform:uppercase;color:var(--steel);transition:color .2s,background .25s,box-shadow .25s,transform .15s}
+.evtab:hover{color:#fff}
+.evtab.on{color:#fff;background:linear-gradient(180deg,#ef4c53,#c0272e);box-shadow:0 4px 0 #7c141a,0 8px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.3)}
+.evtab:active{transform:translateY(2px)}
+.evtab__n:empty{display:none}
+.evtab__n{min-width:22px;height:22px;padding:0 6px;display:grid;place-items:center;border-radius:999px;background:rgba(255,255,255,.14);font-size:11.5px}
+.evs[hidden]{display:none!important}
+.evc--past .slot{filter:saturate(.75)}
+.evc__date--past{background:rgba(6,5,8,.82);box-shadow:inset 0 0 0 1px rgba(242,240,238,.35)}
+.evc--past .btns{gap:8px}
+.evc--past .btn svg{width:15px;height:15px}
+.ev-empty{grid-column:1/-1;border-radius:16px}
+.ev-empty__a{color:var(--red);font-weight:800;margin-left:6px}
+@media (max-width:680px){.ev-tabs{display:flex;width:100%}.evtab{flex:1;justify-content:center;padding:0 10px;font-size:11px}}
+
+/* ---------- Cabeçalho com o atalho "Eventos" ---------- */
+@media (min-width:1340px) and (max-width:1539px){
+  .hdr__in{padding:0 32px}
+  .hdr__logo img{height:34px}
+  .hdr__wa{width:44px;min-height:44px;padding:0}
+  .hdr__wa-t{display:none}
+}
+@media (min-width:1220px) and (max-width:1339px){
+  .hdr__in{padding:0 28px}
+  .hdr__logo img{height:34px}
+  .hdr__wa{width:44px;min-height:44px;padding:0}
+  .hdr__wa-t{display:none}
+  .nav a,.nav__btn{font-size:13px;padding:10px 8px}
+  .nav .nav__xp{font-size:12px;padding:10px 12px}
+}
+@media (min-width:1140px) and (max-width:1219px){
+  .hdr__in{padding:0 24px}
+  .hdr__logo img{height:32px}
+  .nav a,.nav__btn{font-size:12px;padding:10px 6px;letter-spacing:.04em}
+  .nav .nav__xp{font-size:11.5px;padding:10px 11px}
+  .hdr__act{margin-left:8px}
+}
+
 </style>
 </head>
 <body>
+<!-- ===== TEMA DE NATAL: neve ===== -->
+<canvas class="snow" id="snow" data-natal aria-hidden="true"></canvas>
+
 <!-- ===== Ícones (sprite) ===== -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></symbol>
@@ -796,6 +1072,7 @@ a.chip{display:inline-flex;align-items:center}
   <div class="gate__line"></div>
   <div class="gate__box">
     <img src="data:image/png;base64,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" alt="High Line Fitness">
+    <p class="gate__natal" data-natal>✦ Edição de Natal ✦</p>
     <button class="btn btn--red" id="gateSound">Entrar na experiência 🔊</button>
     <button class="gate__skip" id="gateMute">Entrar sem som</button>
   </div>
@@ -823,13 +1100,14 @@ a.chip{display:inline-flex;align-items:center}
       <a href="#professores" data-key="professores">Professores</a>
       <a href="#depoimentos" data-key="depoimentos">Depoimentos</a>
       <a href="#planos" data-key="planos">Planos</a>
+      <a href="#eventos" data-key="eventos">Eventos</a>
       <a href="#contato" data-key="contato">Contato</a>
-      <a class="nav__xp" href="#personalizar" data-key="experiencia"><span class="nav__hex"></span>Sua experiência</a>
+      <a class="nav__xp btn3d" href="#personalizar" data-key="experiencia"><span class="nav__hex"></span>Sua experiência</a>
     </nav>
     <div class="hdr__act">
       <a class="hdr__ico hdr__ig" data-social="instagram" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a>
-      <a class="btn btn--ghost btn--sm hdr__ins" data-link="inscricao" target="_blank" rel="noopener">Inscreva-se</a>
-      <a class="btn btn--red btn--sm hdr__wa" data-wa="geral" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg class="wa-ico"><use href="#i-wa"/></svg><span class="hdr__wa-t">WhatsApp</span></a>
+      <a class="btn btn--red btn--sm btn3d hdr__ins" data-link="inscricao" target="_blank" rel="noopener">Inscreva-se</a>
+      <a class="btn btn--red btn--sm btn3d hdr__wa" data-wa="geral" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg class="wa-ico"><use href="#i-wa"/></svg><span class="hdr__wa-t">WhatsApp</span></a>
     </div>
     <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false"><span></span></button>
   </div>
@@ -853,6 +1131,7 @@ a.chip{display:inline-flex;align-items:center}
         <a class="mlink" href="#planos"><span class="mlink__t">Planos</span><span class="mlink__d">Escolha seu plano</span></a>
         <a class="mlink" href="#comparar-fitness"><span class="mlink__t">Comparar planos</span><span class="mlink__d">Benefícios lado a lado</span></a>
         <a class="mlink mlink--wa" data-wa="musculacao" target="_blank" rel="noopener"><span class="mlink__t">WhatsApp</span><span class="mlink__d">Falar sobre musculação</span></a>
+        <a class="mlink mlink--ev" href="#eventos"><svg class="ev-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 20 9.5 8l4 7 2.5-4L21 20z"/><circle cx="17" cy="5.5" r="2" fill="currentColor"/></svg><span><span class="mlink__t">Eventos · High Adventure</span><span class="mlink__d">Agenda de eventos e experiências da High Line</span></span><span class="mlink__go">Ver eventos →</span></a>
       </div>
     </div>
   </div>
@@ -877,6 +1156,7 @@ a.chip{display:inline-flex;align-items:center}
         <a href="#depoimentos-expansao">Depoimentos <span>→</span></a>
         <a href="#vivido">Vídeos dos alunos <span>→</span></a>
         <a href="#planos-expansao">Planos <span>→</span></a>
+        <a href="#eventos">Eventos · High Adventure <span>→</span></a>
       </div>
     </div>
   </div>
@@ -888,9 +1168,11 @@ a.chip{display:inline-flex;align-items:center}
     <a href="#expansao" data-u="expansao">Expansão High Line →<span class="uni__dot"></span></a>
   </div>
   <i class="hdr__prog" id="hdrProg" aria-hidden="true"></i>
+  <div class="xl" data-natal aria-hidden="true"></div>
 </header>
 <nav class="mnav" id="mnav" aria-label="Menu mobile">
   <a class="mnav__xp" href="#personalizar"><span class="nav__hex"></span>Monte sua experiência</a>
+  <a class="mnav__natal" href="#natal" data-natal>🎄 Natal High Line</a>
   <a href="#inicio">Início</a>
   <a href="#fitness">Fitness</a>
   <div class="mnav__sub">
@@ -898,12 +1180,13 @@ a.chip{display:inline-flex;align-items:center}
   </div>
   <a href="#expansao">Expansão</a>
   <div class="mnav__sub" id="mnavActs"></div>
+  <a href="#eventos">Eventos · High Adventure</a>
   <a href="#professores">Professores</a>
   <a href="#depoimentos">Depoimentos</a>
   <a href="#planos">Planos</a>
   <a href="#contato">Contato</a>
   <div class="btns mnav__btns">
-    <a class="btn btn--ghost" data-link="inscricao" target="_blank" rel="noopener">Inscreva-se</a>
+    <a class="btn btn--red" data-link="inscricao" target="_blank" rel="noopener">Inscreva-se</a>
     <a class="btn btn--red" data-wa="geral" target="_blank" rel="noopener"><svg class="wa-ico"><use href="#i-wa"/></svg>Falar no WhatsApp</a>
   </div>
 </nav>
@@ -917,12 +1200,13 @@ a.chip{display:inline-flex;align-items:center}
   </div>
   <div class="wrap open__content">
     <img class="open__logo" src="data:image/png;base64,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" alt="" aria-hidden="true">
+    <a class="natal-chip" href="#natal" data-natal><span aria-hidden="true">🎄</span>Edição de Natal · conheça a campanha</a>
     <h1 class="d d-xl reveal-t"><span class="ln"><span class="slit">High Line</span></span><span class="ln"><span class="it red">Fitness</span></span></h1>
     <p class="open__sub">Dois espaços. Uma experiência.</p>
     <div class="btns">
-      <a class="btn btn--red" href="#fitness">Conheça a High Line Fitness</a>
-      <a class="btn btn--ghost" href="#expansao">Explore a Expansão</a>
-      <a class="btn btn--light" href="#personalizar"><span class="nav__hex"></span>Monte sua experiência</a>
+      <a class="btn btn--red btn3d" href="#fitness">Conheça a High Line Fitness</a>
+      <a class="btn btn--ghost btn3d" href="#expansao">Explore a Expansão</a>
+      <a class="btn btn--light btn3d" href="#personalizar"><span class="nav__hex"></span>Monte sua experiência</a>
     </div>
   </div>
   <div class="open__scroll">Role</div>
@@ -940,6 +1224,29 @@ a.chip{display:inline-flex;align-items:center}
       <div class="pers__opts" id="persOpts"></div>
       <div class="pers__res" id="persRes" aria-live="polite"></div>
     </div>
+  </div>
+</section>
+
+<!-- ===== TEMA DE NATAL: campanha ===== -->
+<section class="sec natal" id="natal" data-natal data-wa-ctx="natal">
+  <div class="xl xl--top" aria-hidden="true"></div>
+  <div class="wrap natal__g">
+    <div class="natal__txt">
+      <span class="tag tag--gold">Natal High Line</span>
+      <h2 class="d d-l rv"><span class="slit">Um Natal</span><br><span class="it gold">em movimento.</span></h2>
+      <p class="lead" id="natalTexto"></p>
+      <div>
+        <p class="meta natal__cdl" id="cdLabel">Faltam para o Natal</p>
+        <div class="cd" id="countdown" aria-live="off"></div>
+      </div>
+      <ul class="natal__list" id="natalBen"></ul>
+      <p class="meta" id="natalValidade"></p>
+      <div class="btns">
+        <a class="btn btn--red" data-link="inscricao" id="natalBtn" target="_blank" rel="noopener">Garantir minha vaga</a>
+        <a class="btn btn--ghost" data-wa="natal" target="_blank" rel="noopener"><svg class="wa-ico"><use href="#i-wa"/></svg>Falar sobre o Natal</a>
+      </div>
+    </div>
+    <div class="natal__tree" id="natalTree" aria-hidden="true"></div>
   </div>
 </section>
 
@@ -1106,7 +1413,7 @@ a.chip{display:inline-flex;align-items:center}
     <div style="display:grid;gap:24px">
       <p class="lead"><span style="border-bottom:1px dashed rgba(6,5,8,.4)">[ Frase de apoio opcional ]</span></p>
       <div class="btns">
-        <a class="btn btn--ink" data-link="inscricao" target="_blank" rel="noopener">Quero me inscrever</a>
+        <a class="btn btn--red btn--ring" data-link="inscricao" target="_blank" rel="noopener">Quero me inscrever</a>
         <a class="btn btn--light" data-wa="musculacao" target="_blank" rel="noopener"><svg class="wa-ico"><use href="#i-wa"/></svg>Falar no WhatsApp</a>
       </div>
     </div>
@@ -1240,6 +1547,28 @@ a.chip{display:inline-flex;align-items:center}
 </section>
 </div><!-- /expansao -->
 
+<!-- ===== Eventos: High Adventure ===== -->
+<section class="sec ev" id="eventos" data-wa-ctx="eventos">
+  <div class="wrap">
+    <div class="head head--split">
+      <div style="display:grid;gap:18px">
+        <span class="tag">Eventos</span>
+        <h2 class="d d-l rv" id="evNome">High Adventure</h2>
+      </div>
+      <p class="lead" id="evTexto"></p>
+    </div>
+    <div class="ev-tabs" id="evTabs" role="tablist" aria-label="Eventos">
+      <button class="evtab on" role="tab" aria-selected="true" data-t="prox">Próximos eventos<span class="evtab__n" id="evNProx"></span></button>
+      <button class="evtab" role="tab" aria-selected="false" data-t="pass">Eventos passados<span class="evtab__n" id="evNPass"></span></button>
+    </div>
+    <div class="evs" id="evProx" role="tabpanel"></div>
+    <div class="evs" id="evPass" role="tabpanel" hidden></div>
+    <div class="btns" style="margin-top:32px">
+      <a class="btn btn--ghost" data-wa="eventos" target="_blank" rel="noopener"><svg class="wa-ico"><use href="#i-wa"/></svg>Falar sobre eventos</a>
+    </div>
+  </div>
+</section>
+
 <!-- 37. Localização -->
 <section class="sec sec--line sec--light" id="contato" data-wa-ctx="geral">
   <div class="wrap">
@@ -1262,6 +1591,7 @@ a.chip{display:inline-flex;align-items:center}
   <div class="wrap final__c">
     <h2 class="d d-xl"><span class="slit">Seu movimento</span><br><span class="slit">não tem limites.</span></h2>
     <p class="final__sub">High Line Fitness + Expansão High Line</p>
+    <p class="natal-greet" data-natal>🎄 Boas festas! A família High Line deseja um Natal em movimento.</p>
     <div class="btns" style="justify-content:center">
       <a class="btn btn--red" data-link="inscricao" target="_blank" rel="noopener">Quero me inscrever</a>
       <a class="btn btn--ghost" data-wa="geral" target="_blank" rel="noopener"><svg class="wa-ico"><use href="#i-wa"/></svg>Falar no WhatsApp</a>
@@ -1283,7 +1613,7 @@ a.chip{display:inline-flex;align-items:center}
         <ul>
           <li><a href="#inicio">Início</a></li><li><a href="#fitness">Fitness</a></li><li><a href="#expansao">Expansão</a></li>
           <li><a href="#atividades">Atividades</a></li><li><a href="#professores">Professores</a></li><li><a href="#depoimentos">Depoimentos</a></li>
-          <li><a href="#planos">Planos</a></li><li><a href="#contato">Contato</a></li>
+          <li><a href="#planos">Planos</a></li><li><a href="#eventos">Eventos · High Adventure</a></li><li><a href="#contato">Contato</a></li>
         </ul>
       </div>
       <div>
@@ -1297,6 +1627,7 @@ a.chip{display:inline-flex;align-items:center}
     </div>
     <div class="foot__bot">
       <span>© <span id="year"></span> High Line Fitness. Todos os direitos reservados.</span>
+      <span class="foot__natal" data-natal>✦ Boas festas ✦</span>
       <span class="tp">[ CNPJ / razão social ]</span>
     </div>
   </div>
@@ -1347,6 +1678,19 @@ a.chip{display:inline-flex;align-items:center}
    ===================================================================== */
 window.HL = {
 
+  /* ---------- TEMA ----------
+     "natal"  = ativa o tema de Natal (neve, luzes, campanha, árvore, contagem regressiva)
+     "padrao" = volta ao visual normal da High Line                                  */
+  tema: "padrao",
+
+  /* ---------- Campanha de Natal (aparece só com tema "natal") ---------- */
+  natal: {
+    texto: "",                  // texto da campanha
+    beneficios: ["", "", ""],   // condições/benefícios REAIS da campanha
+    validade: "",               // ex.: "até 24/12"
+    link: ""                    // link de inscrição da campanha (vazio = usa links.inscricao)
+  },
+
   /* ---------- Contato e links ---------- */
   contato: {
     whatsapp: "",               // só números com DDI+DDD. Ex.: "5585900000000"
@@ -1367,6 +1711,7 @@ window.HL = {
   /* ---------- WhatsApp contextual (rótulo do botão + mensagem) ---------- */
   whatsappMensagens: {
     geral:      { rotulo: "Falar no WhatsApp",        msg: "Olá! Vim pelo site da High Line e gostaria de mais informações." },
+    natal:      { rotulo: "Falar sobre o Natal",      msg: "Olá! Vim pelo site e quero saber sobre a campanha de Natal da High Line." },
     musculacao: { rotulo: "Falar sobre musculação",   msg: "Olá! Quero saber mais sobre a musculação na High Line Fitness." },
     planos:     { rotulo: "Falar sobre planos",       msg: "Olá! Quero saber mais sobre os planos da High Line." },
     expansao:   { rotulo: "Falar sobre a Expansão",   msg: "Olá! Quero conhecer as atividades da Expansão High Line." },
@@ -1376,13 +1721,15 @@ window.HL = {
     cross:      { rotulo: "Falar sobre Cross",        msg: "Olá! Quero saber mais sobre o Cross Training na High Line." },
     danca:      { rotulo: "Falar sobre dança",        msg: "Olá! Quero saber mais sobre as aulas de dança na High Line." },
     bale:       { rotulo: "Falar sobre balé",         msg: "Olá! Quero saber mais sobre o balé na High Line." },
-    lanchonete: { rotulo: "Falar com a lanchonete",   msg: "Olá! Quero saber mais sobre a lanchonete da High Line." }
+    lanchonete: { rotulo: "Falar com a lanchonete",   msg: "Olá! Quero saber mais sobre a lanchonete da High Line." },
+    eventos:    { rotulo: "Falar sobre eventos",      msg: "Olá! Quero saber mais sobre os eventos High Adventure da High Line." }
   },
 
   /* ---------- Áudio ambiente ---------- */
   audio: {
     principal: { src: "", nome: "Trilha principal" },   // instrumental, sem voz
     classica:  { src: "", nome: "Piano / clássica" },   // toca nas seções de Dança e Balé
+    natal:     { src: "", nome: "Trilha de Natal" },    // com tema "natal", substitui a trilha principal
     volume: 0.5,
     fadeMs: 1800
   },
@@ -1518,6 +1865,20 @@ window.HL = {
       catalogo: "" /* link do catálogo da lanchonete (cardápio, PDF, Instagram, iFood etc.) */ }
   ],
 
+  /* ---------- Eventos: High Adventure ----------
+     >>> ÁREA PARA ATUALIZAR OS EVENTOS <<<
+     agendados: próximos eventos. Use a data no formato "AAAA-MM-DD" (ex.: "2026-11-15").
+                Quando a data passar, o evento vai sozinho para "Eventos passados".
+       { nome, data, horario, local, descricao, foto, link, vagas }
+     passados: eventos já realizados (somente reais).
+       { nome, data, local, resumo, capa, fotos: ["midia/fotos/..."], video }          */
+  eventos: {
+    nome: "High Adventure",
+    texto: "",
+    agendados: [],
+    passados: []
+  },
+
   /* ---------- 32. Horários ----------
      { dia:"seg"|"ter"|"qua"|"qui"|"sex"|"sab", horario, atividade, professor, modalidade, vagas } */
   horarios: [],
@@ -1545,6 +1906,8 @@ window.HL = {
 (function () {
   "use strict";
   const HL = window.HL;
+  const NATAL = HL.tema === "natal";
+  if (NATAL) document.body.classList.add("theme-natal");
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const esc = s => String(s ?? "").replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
@@ -1613,7 +1976,7 @@ window.HL = {
     `<a class="btn ${cls}" data-wa="${key}" ${num ? `data-wa-num="${esc(num)}"` : ""} target="_blank" rel="noopener"><svg class="wa-ico"><use href="#i-wa"/></svg>${esc(label)}</a>`;
 
   const CTASection = (key, link, dark) =>
-    `<div class="btns"><a class="btn ${dark ? "btn--ink" : "btn--red"}" data-link="inscricao" ${link ? `data-url="${esc(link)}"` : ""} target="_blank" rel="noopener">Fazer inscrição</a>${WhatsAppButton(key)}</div>`;
+    `<div class="btns"><a class="btn btn--red" data-link="inscricao" ${link ? `data-url="${esc(link)}"` : ""} target="_blank" rel="noopener">Fazer inscrição</a>${WhatsAppButton(key)}</div>`;
 
   /* Professor */
   function ProfessorCard(p) {
@@ -1805,7 +2168,7 @@ window.HL = {
       <ul>${ben}</ul>
       <div style="display:flex;flex-wrap:wrap;gap:6px">${mods}</div>
       <p class="plan__obs">${val(p.observacoes, "Observações")}</p>
-      <a class="btn ${p.destaque ? "btn--ink" : "btn--red"}" data-link="inscricao" ${p.link ? `data-url="${esc(p.link)}"` : ""} target="_blank" rel="noopener">Fazer inscrição</a>
+      <a class="btn btn--red" data-link="inscricao" ${p.link ? `data-url="${esc(p.link)}"` : ""} target="_blank" rel="noopener">Fazer inscrição</a>
     </article>`;
   }
   function PlanComparison(el, cfg, nCols = 3) {
@@ -1836,6 +2199,70 @@ window.HL = {
     };
     dEl.addEventListener("click", e => { const b = e.target.closest(".day"); if (b) { cur = b.dataset.d; render(); } });
     render();
+  }
+
+  /* Eventos — High Adventure (próximos + passados) */
+  const MESES = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
+  const parseISO = s => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ""); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; };
+  const fmtData = s => { const d = parseISO(s); return d ? `${String(d.getDate()).padStart(2, "0")} ${MESES[d.getMonth()]} ${d.getFullYear()}` : (s || ""); };
+  function EventCard(e, i) {
+    return `<article class="evc">
+      ${Slot({ src: e.foto, alt: e.nome, label: "[ Foto do evento ]", cls: "slot--h" })}
+      <span class="evc__date">${e.data ? esc(fmtData(e.data)) : "[ Data ]"}${e.horario ? " · " + esc(e.horario) : ""}</span>
+      <div class="evc__b">
+        <h3 class="evc__n">${val(e.nome, `Nome do evento ${i + 1}`)}</h3>
+        <p class="evc__l">${ico("pin")}<span>${val(e.local, "Local")}</span></p>
+        <p class="evc__d">${val(e.descricao, "Descrição do evento")}</p>
+        ${e.vagas ? `<span class="pill">${esc(e.vagas)}</span>` : ""}
+        <a class="btn btn--red btn--sm" data-link="inscricao" ${e.link ? `data-url="${esc(e.link)}"` : ""} target="_blank" rel="noopener">Quero participar</a>
+      </div>
+    </article>`;
+  }
+  function PastEventCard(e, i) {
+    const fotos = (e.fotos || []).filter(Boolean);
+    const fk = reg(fotos.length ? fotos.map((f, k) => ({ titulo: `${e.nome || "Evento"} — foto ${k + 1}`, src: f, img: true }))
+                                : [{ titulo: e.nome || "Fotos do evento", img: true }, { titulo: e.nome || "Fotos do evento", img: true }]);
+    const vk = e.video ? reg([{ titulo: e.nome || "Vídeo do evento", src: e.video, poster: e.capa, formato: "horizontal" }]) : "";
+    return `<article class="evc evc--past">
+      ${Slot({ src: e.capa || fotos[0], alt: e.nome, label: "[ Foto de capa do evento ]", cls: "slot--h" })}
+      <span class="evc__date evc__date--past">Realizado · ${e.data ? esc(fmtData(e.data)) : "[ Data ]"}</span>
+      <div class="evc__b">
+        <h3 class="evc__n">${val(e.nome, `Evento realizado ${i + 1}`)}</h3>
+        <p class="evc__l">${ico("pin")}<span>${val(e.local, "Local")}</span></p>
+        <p class="evc__d">${val(e.resumo, "Resumo de como foi o evento")}</p>
+        <div class="btns">
+          <button class="btn btn--ghost btn--sm" data-vlist="${fk}" data-vi="0">${ico("img")} Ver fotos${fotos.length ? ` (${fotos.length})` : ""}</button>
+          ${vk ? `<button class="btn btn--ghost btn--sm" data-vlist="${vk}" data-vi="0">▶ Ver vídeo</button>` : ""}
+        </div>
+      </div>
+    </article>`;
+  }
+  function EventsSection() {
+    const E = HL.eventos || {};
+    $("#evNome").textContent = E.nome || "High Adventure";
+    $("#evTexto").innerHTML = E.texto ? esc(E.texto) : ph("Texto sobre os eventos High Adventure");
+    const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+    const ag = [...(E.agendados || []), ...(E.lista || [])];
+    const futuros = ag.filter(e => { const d = parseISO(e.data); return !d || d >= hoje; })
+      .sort((x, y) => (parseISO(x.data) || 0) - (parseISO(y.data) || 0));
+    const vencidos = ag.filter(e => { const d = parseISO(e.data); return d && d < hoje; })
+      .map(e => ({ ...e, resumo: e.resumo || e.descricao, capa: e.capa || e.foto }));
+    const passados = [...(E.passados || []), ...vencidos].sort((x, y) => (parseISO(y.data) || 0) - (parseISO(x.data) || 0));
+    const vazio = !futuros.length && !passados.length;   /* sem nada cadastrado: mostra a estrutura */
+    const msg = t => `<div class="empty ev-empty">${t}</div>`;
+    $("#evProx").innerHTML = futuros.length ? futuros.map(EventCard).join("")
+      : vazio ? [{}, {}, {}].map(EventCard).join("")
+      : msg(`Novos eventos High Adventure em breve. <a class="ev-empty__a" data-wa="eventos" target="_blank" rel="noopener">Quero ser avisado no WhatsApp →</a>`);
+    $("#evPass").innerHTML = passados.length ? passados.map(PastEventCard).join("")
+      : vazio ? [{}, {}, {}].map(PastEventCard).join("")
+      : msg("Os eventos realizados vão aparecer aqui.");
+    $("#evNProx").textContent = futuros.length || ""; $("#evNPass").textContent = passados.length || "";
+    const tabs = $("#evTabs");
+    tabs.addEventListener("click", ev => {
+      const t = ev.target.closest(".evtab"); if (!t) return;
+      $$(".evtab", tabs).forEach(x => { const on = x === t; x.classList.toggle("on", on); x.setAttribute("aria-selected", on); });
+      $("#evProx").hidden = t.dataset.t !== "prox"; $("#evPass").hidden = t.dataset.t !== "pass";
+    });
   }
 
   /* Localização */
@@ -1929,6 +2356,7 @@ window.HL = {
     $("#mosaic").innerHTML = ve.map((v, i) => VideoCard({ ...v, formato: "vertical" }, vek, i)).join("");
 
     Schedule();
+    EventsSection();
     LocationSection();
 
     /* Redes */
@@ -2058,8 +2486,9 @@ window.HL = {
     init() {
       ["principal", "classica"].forEach(k => {
         const el = new Audio(); el.loop = true; el.preload = "none"; el.volume = 0;
-        if (HL.audio[k].src) el.src = HL.audio[k].src;
-        this.t[k] = { el, src: HL.audio[k].src, nome: HL.audio[k].nome };
+        const tr = k === "principal" && NATAL && HL.audio.natal && HL.audio.natal.src ? HL.audio.natal : HL.audio[k];
+        if (tr.src) el.src = tr.src;
+        this.t[k] = { el, src: tr.src, nome: k === "principal" && NATAL ? (HL.audio.natal || tr).nome : tr.nome };
       });
       $("#audToggle").onclick = () => this.on ? this.pause() : this.play();
       this.ui();
@@ -2085,7 +2514,8 @@ window.HL = {
       const tr = this.t[this.want];
       $("#aud").classList.toggle("playing", this.on);
       $("#audToggle").innerHTML = ico(this.on ? "vol" : "mute");
-      $("#audToggle").setAttribute("aria-label", this.on ? "Desligar som" : "Ligar som");
+      $("#audToggle").setAttribute("aria-label", this.on ? "Desligar música" : "Ligar música");
+      $("#audToggle").title = this.on ? "Desligar música" : "Ligar música";
       $("#audName").textContent = tr.src ? tr.nome : `${tr.nome} (não cadastrada)`;
     }
   };
@@ -2110,7 +2540,7 @@ window.HL = {
     const hdr = $("#hdr"), open = $("#inicio"), fit = $("#fitness"), exp = $("#expansao"), trans = $("#trans"), stage = $(".trans__stage", trans);
     const navEls = $$("#nav [data-key]");
     const targets = [["inicio","inicio"],["personalizar","experiencia"],["universos","inicio"],["fitness","fitness"],["professores","professores"],["depoimentos","depoimentos"],["galeria","fitness"],["planos","planos"],
-      ["trans","expansao"],["expansao","expansao"],["professores-expansao","professores"],["depoimentos-expansao","depoimentos"],["vivido","expansao"],["planos-expansao","planos"],["contato","contato"]]
+      ["trans","expansao"],["expansao","expansao"],["professores-expansao","professores"],["depoimentos-expansao","depoimentos"],["vivido","expansao"],["planos-expansao","planos"],["eventos","eventos"],["contato","contato"]]
       .map(([id, key]) => [document.getElementById(id), key]).filter(t => t[0]);
     const prog = $("#hdrProg");
     const heroes = $$(".hero .slot--cover, .open__split, .open > .slot--cover");
@@ -2286,6 +2716,92 @@ window.HL = {
     addEventListener("wheel", () => { if (openId && !$(".mega.is-open:hover")) set(null); }, { passive: true });
   }
 
+
+  /* =================================================================
+     TEMA DE NATAL
+     ================================================================= */
+  function initNatal() {
+    if (!NATAL) { const s = $("#snow"); if (s) s.remove(); return; }
+    const N = HL.natal || {};
+    $("#natalTexto").innerHTML = N.texto ? esc(N.texto) : ph("Texto da campanha de Natal");
+    $("#natalBen").innerHTML = (N.beneficios && N.beneficios.length ? N.beneficios : ["", "", ""])
+      .map(x => `<li>${x ? esc(x) : ph("Benefício / condição da campanha")}</li>`).join("");
+    $("#natalValidade").innerHTML = `Válido até ${N.validade ? esc(N.validade) : ph("validade")}`;
+    if (N.link) $("#natalBtn").dataset.url = N.link;
+    bindLinks($("#natal"));
+
+    /* Contagem regressiva para 25/12 */
+    const cd = $("#countdown"), lbl = $("#cdLabel");
+    const two = n => String(n).padStart(2, "0");
+    const tick = () => {
+      const now = new Date(), y = now.getFullYear(), xmas = new Date(y, 11, 25), end = new Date(y + 1, 0, 1);
+      if (now >= xmas && now < end) { lbl.textContent = "Boas festas"; cd.innerHTML = `<p class="d d-m" style="margin:0">Feliz <span class="it gold">Natal!</span></p>`; return; }
+      let s = Math.max(0, Math.floor((xmas - now) / 1000));
+      const d = Math.floor(s / 86400); s %= 86400;
+      const h = Math.floor(s / 3600); s %= 3600;
+      const m = Math.floor(s / 60); s %= 60;
+      cd.innerHTML = [[d, "dias"], [two(h), "horas"], [two(m), "min"], [two(s), "seg"]].map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join("");
+    };
+    tick(); setInterval(tick, 1000);
+
+    /* Árvore de hexágonos (cores da marca + verde de Natal) */
+    const r = 30, w = Math.sqrt(3) * r, rows = 5, cx = 200, top = 92;
+    const hex = (x, y, rr) => Array.from({ length: 6 }, (_, k) => { const a = Math.PI / 180 * (60 * k - 90); return `${(x + rr * Math.cos(a)).toFixed(1)},${(y + rr * Math.sin(a)).toFixed(1)}`; }).join(" ");
+    const fills = ["pine", "red", "pine", "line", "pine", "pine", "red", "line", "pine", "red", "pine", "pine", "line", "red", "pine"];
+    let k = 0, cells = "", orns = "";
+    for (let i = 0; i < rows; i++) for (let j = 0; j <= i; j++) {
+      const x = cx + (j - i / 2) * w, y = top + i * 1.5 * r, f = fills[k % fills.length];
+      cells += `<polygon class="t-${f}" points="${hex(x, y, r - 2.5)}" style="--d:${(k * 0.07).toFixed(2)}s"/>`;
+      if (k % 3 === 1) orns += `<circle class="t-orn" cx="${(x + (j % 2 ? 8 : -8)).toFixed(1)}" cy="${(y + 12).toFixed(1)}" r="4.5" style="--d:${(k * 0.37 % 2.4).toFixed(2)}s"/>`;
+      k++;
+    }
+    const baseY = top + (rows - 1) * 1.5 * r + r;
+    const star = (x, y, R, rr) => Array.from({ length: 10 }, (_, i) => { const a = Math.PI / 5 * i - Math.PI / 2, q = i % 2 ? rr : R; return `${(x + q * Math.cos(a)).toFixed(1)},${(y + q * Math.sin(a)).toFixed(1)}`; }).join(" ");
+    $("#natalTree").innerHTML = `<svg viewBox="0 0 400 460" role="img">
+      <defs><radialGradient id="tglow"><stop offset="0" stop-color="#E3BE6B" stop-opacity=".35"/><stop offset="1" stop-color="#E3BE6B" stop-opacity="0"/></radialGradient></defs>
+      <circle cx="200" cy="40" r="90" fill="url(#tglow)"/>
+      <ellipse cx="200" cy="${baseY + 52}" rx="150" ry="14" fill="rgba(242,240,238,.08)"/>
+      <rect x="186" y="${baseY - 4}" width="28" height="44" fill="#9E1F26"/>
+      <rect x="186" y="${baseY - 4}" width="28" height="6" fill="rgba(0,0,0,.35)"/>
+      ${cells}${orns}
+      <polygon class="t-star" points="${star(200, 46, 26, 11)}"/>
+    </svg>`;
+
+    /* Luzes de Natal */
+    const lights = () => $$(".xl").forEach(el => {
+      const W = el.parentElement.getBoundingClientRect().width, n = Math.max(6, Math.floor(W / 46));
+      el.style.width = n * 46 + "px";
+      if (el.children.length !== n) el.innerHTML = "<i></i>".repeat(n);
+    });
+    lights(); addEventListener("resize", lights);
+
+    /* Neve */
+    const c = $("#snow");
+    if (reduce || !c) { if (c) c.remove(); return; }
+    const x = c.getContext("2d"), dpr = Math.min(2, devicePixelRatio || 1);
+    let W, H, fl = [], last = performance.now(), run = true;
+    const mk = init => ({ x: Math.random() * W, y: init ? Math.random() * H : -10, r: .6 + Math.random() * 2.2, s: .35 + Math.random() * .9, d: Math.random() * 6.28, a: .3 + Math.random() * .5 });
+    const resize = () => {
+      W = innerWidth; H = innerHeight; c.width = W * dpr; c.height = H * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.round(Math.min(130, W / 11));
+      while (fl.length < n) fl.push(mk(true)); fl.length = n;
+    };
+    const frame = n => {
+      if (!run) return;
+      const dt = Math.min(50, n - last) / 16.67; last = n;
+      x.clearRect(0, 0, W, H); x.fillStyle = "#fff";
+      for (const f of fl) {
+        f.y += f.s * dt; f.d += .012 * dt; f.x += Math.sin(f.d) * .45 * dt;
+        if (f.y > H + 6) Object.assign(f, mk(false));
+        x.globalAlpha = f.a; x.beginPath(); x.arc(f.x, f.y, f.r, 0, 6.283); x.fill();
+      }
+      requestAnimationFrame(frame);
+    };
+    resize(); addEventListener("resize", resize);
+    document.addEventListener("visibilitychange", () => { run = !document.hidden; if (run) { last = performance.now(); requestAnimationFrame(frame); } });
+    requestAnimationFrame(frame);
+  }
+
   /* ---------------- Menu mobile ---------------- */
   function initMenu() {
     const b = $("#burger"), body = document.body;
@@ -2310,6 +2826,7 @@ window.HL = {
   initExpansaoLink();
   initFitnessLink();
   initMega();
+  initNatal();
   bindLinks($("#hdr"));
 })();
 
